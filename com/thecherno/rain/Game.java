@@ -9,28 +9,21 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
-import com.thecherno.rain.entity.mob.Player;
 import com.thecherno.rain.graphics.Screen;
-import com.thecherno.rain.input.Keyboard;
-import com.thecherno.rain.level.Level;
-import com.thecherno.rain.level.RandomLevel;
-import com.thecherno.rain.level.SpawnLevel;
-import com.thecherno.rain.level.TileCoordinate;
+import com.thecherno.rain.level.OneMapLevel;
 
 public class Game extends Canvas implements Runnable { 
 	private static final long serialVersionUID = 1L;
 
-	private static int width = 300;
-	private static int height = width / 16 * 9;
-	private static int scale = 3;
+	private static int width = 507;
+	private static int height = width;
+	private static int scale = 2;
 	
 	public static String title = "Rain";
 	
 	private Thread thread;
 	private JFrame frame;
-	private Keyboard key;
-	private Level level;
-	private Player player;
+	private OneMapLevel carrfor;
 	private boolean running = false;
 	
 	private Screen screen;
@@ -44,13 +37,7 @@ public class Game extends Canvas implements Runnable {
 	
 	    screen = new Screen(width, height);
 	    frame = new JFrame();
-	    key = new Keyboard();
-	    level = Level.spawn;
-	    TileCoordinate playerSpawn = new TileCoordinate(19, 62);
-	    player = new Player(playerSpawn.x(), playerSpawn.y(), key);
-	    player.init(level);
-	    
-	    addKeyListener(key);
+	    carrfor = new OneMapLevel("/res/levels/one_map/map-export_original.png");
 	}
 
 	public static int getWindowWidth() {
@@ -115,8 +102,6 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	public void update() {
-		key.update();
-		player.update();
 	}
 	
 	public void render() {
@@ -127,13 +112,8 @@ public class Game extends Canvas implements Runnable {
 	    }
 	    
 	    screen.clear();
+	    screen.renderAll(carrfor);
       
-	    int xScroll = player.x - screen.width / 2;
-	    int yScroll = player.y - screen.height / 2;
-	    
-	    level.render(xScroll, yScroll, screen);
-	    player.render(screen);
-	    
 	    for(int i = 0; i < pixels.length; i++) {
 	    	pixels[i] = screen.pixels[i];
 	    }

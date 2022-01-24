@@ -9,7 +9,7 @@ public class Level {
 	protected int[] tilesInt;
 	protected int[] tiles;
 
-	public static Level spawn = new SpawnLevel("/res/levels/spawn.png");
+	public static Level spawn = new SpawnLevel("/res/levels/tiles_levels/spawn.png");
 
 	public Level(int width, int height) {
 		this.width = width;
