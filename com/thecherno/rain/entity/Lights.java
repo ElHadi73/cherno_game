@@ -10,6 +10,7 @@ public class Lights extends Thread {
 	public int x1,y1,x2,y2;
 	public boolean running = true;
 	public Sprite flights = Sprite.flights;
+	public Sprite light_right = Sprite.light_right;
 	public Sprite stright_green = Sprite.stright_green;
 	public Sprite stright_red = Sprite.stright_red;
 	public Sprite small_green = Sprite.small_green;

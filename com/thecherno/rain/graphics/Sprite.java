@@ -10,6 +10,7 @@ public class Sprite {
 	public int[] pixels;
 	
 	public static Sprite flights = new Sprite(64, 64, SpriteSheet.flights);
+	public static Sprite light_right = new Sprite(37, 47, SpriteSheet.light_right);
 	public static Sprite stright_green = new Sprite(8, 7, SpriteSheet.stright_green);
 	public static Sprite stright_red = new Sprite(8, 7, SpriteSheet.stright_red);
 	public static Sprite small_green = new Sprite(5, 7, SpriteSheet.small_green);

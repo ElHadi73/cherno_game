@@ -13,6 +13,7 @@ public class SpriteSheet {
 	private int height;
 
 	public static SpriteSheet flights = new SpriteSheet("/res/textures/carrfor/4lights.png", 64, 64);
+	public static SpriteSheet light_right = new SpriteSheet("/res/textures/carrfor/light_right.png", 37, 47);
 	public static SpriteSheet stright_green = new SpriteSheet("/res/textures/carrfor/green.png", 8, 7);
 	public static SpriteSheet stright_red = new SpriteSheet("/res/textures/carrfor/red.png", 8, 7);
 	public static SpriteSheet small_green = new SpriteSheet("/res/textures/carrfor/green_small.png", 5, 7);
