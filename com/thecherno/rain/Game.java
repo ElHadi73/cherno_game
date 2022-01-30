@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 
 import com.thecherno.rain.graphics.Screen;
 import com.thecherno.rain.level.OneMapLevel;
+import com.thecherno.rain.entity.Lights;
 
 public class Game extends Canvas implements Runnable { 
 	private static final long serialVersionUID = 1L;
@@ -25,6 +26,7 @@ public class Game extends Canvas implements Runnable {
 	private JFrame frame;
 	private OneMapLevel carrfor;
 	private boolean running = false;
+	private Lights lights;
 	
 	private Screen screen;
 	
@@ -38,16 +40,9 @@ public class Game extends Canvas implements Runnable {
 	    screen = new Screen(width, height);
 	    frame = new JFrame();
 	    carrfor = new OneMapLevel("/res/levels/one_map/map-export_original.png");
+	    lights = new Lights();
 	}
 
-	public static int getWindowWidth() {
-		return width * scale;
-	}
-
-	public static int getWindowHeight() {
-		return height * scale;
-	}
-	
 	public synchronized void start() {
 	    running = true;
 	    thread = new Thread(this, "Display");
@@ -74,6 +69,8 @@ public class Game extends Canvas implements Runnable {
 		long timer = System.currentTimeMillis();
 		
 		requestFocus();
+
+		lights.start();
 		
 	    while (running) {
 	    	long now = System.nanoTime();
@@ -112,7 +109,7 @@ public class Game extends Canvas implements Runnable {
 	    }
 	    
 	    screen.clear();
-	    screen.renderAll(carrfor);
+	    screen.renderAll(carrfor, lights);
       
 	    for(int i = 0; i < pixels.length; i++) {
 	    	pixels[i] = screen.pixels[i];

@@ -6,17 +6,18 @@ class Car extends Mob implements Runnable {
 	private boolean moving = false;
 	private Move move;
 
-	public Car (){
-		this.move = Move;
+	public Car (ArrayList<Mob> cars_list){
+		this.move = new Move();
+		this.cars_list = cars_list;
 	}
 
 	public void update() {
 		xa = 0, ya = 0;
 
-		if(input.up) ya--;
-		if(input.down) ya++;
-		if(input.left) xa--;
-		if(input.right) xa++;
+		if(this.move.up) ya--;
+		if(this.move.down) ya++;
+		if(this.move.left) xa--;
+		if(this.move.right) xa++;
 
 		if(xa != 0 || ya != 0) {
 			move(xa, ya);
@@ -51,7 +52,7 @@ class Car extends Mob implements Runnable {
 			this.x = 250;
 			this.y = 0;
 			do {
-				setMove(0, 1, 0, 0);
+				this.move.setMove(0, 1, 0, 0);
 				this.update();
 				this.render();
 				if(y > 507)
@@ -61,7 +62,7 @@ class Car extends Mob implements Runnable {
 			this.x = 571;
 			this.y = 250;
 			do {
-				setMove(0, 0, 0, 1);
+				this.move.setMove(0, 0, 0, 1);
 				this.update();	
 				this.render();
 				if(x < 0)
@@ -71,7 +72,7 @@ class Car extends Mob implements Runnable {
 			this.x = 250;
 			this.y = 0;
 			do {
-				setMove(1, 0, 0, 0);
+				this.move.setMove(1, 0, 0, 0);
 				this.update();	
 				this.render();
 				if(y < 0)
@@ -81,7 +82,7 @@ class Car extends Mob implements Runnable {
 			this.x = 0;
 			this.y = 250;
 			do {
-				setMove(0, 0, 0, 1);
+				this.move.setMove(0, 0, 0, 1);
 				this.update();	
 				this.render();
 				if(x > 507)
