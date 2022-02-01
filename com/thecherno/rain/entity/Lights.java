@@ -29,7 +29,6 @@ public class Lights extends Thread {
 			try {
 				sleep(3000);
 			} catch(InterruptedException e) {}
-			System.out.println(light_1);
 		}
 	}
 }
