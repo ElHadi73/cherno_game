@@ -114,7 +114,7 @@ public class Car extends Mob implements Runnable {
 	}
 
 	public void run () {
-		int entre = random.nextInt(3);
+		int entre = random.nextInt(4);
 		int leave;
 		do {
 			leave = random.nextInt(3);
