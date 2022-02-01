@@ -44,7 +44,6 @@ public abstract class Mob extends Entity {
 				current_sprite = cars_list.get(counter).sprite_side;
 			else if(dir == 2){
 				current_sprite = cars_list.get(counter).sprite_down;
-				System.out.println(((xa+x)<=(test_car_col.x+ current_sprite.width))+"  ||  "+((xa+x)>=(test_car_col.x))+"  ||  "+ ((ya+y)<=(test_car_col.y+current_sprite.height))+"  ||  "+((ya+y)>=test_car_col.y));
 			}
 			else
 				current_sprite = cars_list.get(counter).sprite_up;
