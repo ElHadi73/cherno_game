@@ -91,19 +91,19 @@ public class Screen {
 	}
 
 	public void renderCar(Car car, Sprite sprite, int flip) {
-		//int xs;
+		int xs;
 		for(int y = 0; y < sprite.height; y++) {
 			if((car.y+y) < 0 || (car.y+y) >= 507)
 				continue;
 			for(int x = 0; x < sprite.width; x++){
-				//xs = x;
-				//if(flip == 1)
-				//	xs = 31 - x;
-				if( (car.x+x) < 0 || (car.x+x) >= 507)
+				xs = x;
+				if(flip == 1)
+					xs = 38 - x;
+				if( (car.x+xs) < 0 || (car.x+xs) >= 507)
 					continue;
 				int col = sprite.pixels[x + y * sprite.width];
 				if(col != 0xffff00ff)
-					pixels[car.x +x + (car.y+y) * width] = col;
+					pixels[car.x +xs + (car.y+y) * width] = col;
 			}
 		}
 	}
