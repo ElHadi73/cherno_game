@@ -83,9 +83,9 @@ public class Game extends Canvas implements Runnable {
 	    while (running) {
 
 		    //create car
-		    if(cars.size()<9)
-			    if(random.nextInt(1000) == 0){
-				    car = new Car(cars);
+		    if(cars.size()<20)
+			    if(random.nextInt(200) == 0){
+				    car = new Car(cars,this);
 				    cars.add(car);
 				    car_thread = new Thread(car,String.valueOf(car_n));
 				    car.setthread(car_thread);
