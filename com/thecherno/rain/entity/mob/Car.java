@@ -13,6 +13,7 @@ public class Car extends Mob implements Runnable {
 	private Thread thread;
 
 	public Car (ArrayList<Car> cars_list){
+		super();
 		this.move = new Move();
 		this.cars_list = cars_list;
 	}

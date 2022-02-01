@@ -24,9 +24,7 @@ public abstract class Mob extends Entity {
 
 		if(!collision(xa, ya, dir)) {
 			x += xa;
-			y = y + ya;
-			if(ya == -1)
-			System.out.println(y);
+			y += ya;
 		}
 	}
 
@@ -43,11 +41,13 @@ public abstract class Mob extends Entity {
 			test_car_col = cars_list.get(counter);
 			if(dir == 1 || dir == 3)
 				current_sprite = cars_list.get(counter).sprite_side;
-			else if(dir == 2)
+			else if(dir == 2){
 				current_sprite = cars_list.get(counter).sprite_down;
+				System.out.println(((xa+x)<=(test_car_col.x+ current_sprite.width))+"  ||  "+((xa+x)>=(test_car_col.x))+"  ||  "+ ((ya+y)<=(test_car_col.y+current_sprite.height))+"  ||  "+((ya+y)>=test_car_col.y));
+			}
 			else
 				current_sprite = cars_list.get(counter).sprite_up;
-			if( (xa+x)<=(test_car_col.x+ current_sprite.width) && (xa+x)>=(test_car_col.x) && (ya+y)<=(test_car_col.y+current_sprite.height) && (ya+y)>=test_car_col.y)
+			if( (xa+x)<(test_car_col.x+ current_sprite.width) && (xa+x)>(test_car_col.x) && (ya+y)<(test_car_col.y+current_sprite.height) && (ya+y)>test_car_col.y)
 				return true;
 		}
 		return false;
