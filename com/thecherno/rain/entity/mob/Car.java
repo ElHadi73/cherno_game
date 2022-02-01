@@ -60,7 +60,7 @@ public class Car extends Mob implements Runnable {
 
 	private void time_wait(){
 		try {
-			thread.sleep(15);
+			thread.sleep(10);
 		} catch(InterruptedException ex){
 			Thread.currentThread().interrupt();
 		}
@@ -72,12 +72,12 @@ public class Car extends Mob implements Runnable {
 		boolean onTown = true;
 		if(enter == 0) {//this indicate that it enteres from the top
 			this.x = 230;
-			this.y = 0;
+			this.y = -39;
 			do {
 				this.move.setMove(false, true, false, false);
 				time_wait();
 				this.update();
-				if(y > 507)
+				if(y > 571)
 					onTown = false;
 			}while(onTown);
 		} else if(enter == 1) {//this indicate that it enteres from the right
@@ -87,7 +87,7 @@ public class Car extends Mob implements Runnable {
 				this.move.setMove(false, false, false, true);
 				time_wait();
 				this.update();	
-				if(x < 0)
+				if(x < -sprite.width)
 					onTown = false;
 			}while(onTown);
 		} else if(enter == 2) {//this indicate that it enteres from the bottom
@@ -97,17 +97,17 @@ public class Car extends Mob implements Runnable {
 				this.move.setMove(true, false, false, false);
 				time_wait();
 				this.update();	
-				if(y < 0)
+				if(y < -sprite.height)
 					onTown = false;
 			}while(onTown);
 		} else if(enter == 3) {//this indicate that it enteres from the right
-			this.x = 0;
+			this.x = -39;
 			this.y = 250;
 			do {
 				this.move.setMove(false, false, true, false);
 				time_wait();
 				this.update();	
-				if(x > 507)
+				if(x > 571)
 					onTown = false;
 			}while(onTown);
 		}
