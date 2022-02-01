@@ -21,7 +21,7 @@ public class SpriteSheet {
 
 	public static SpriteSheet car_up = new SpriteSheet("/res/textures/carrfor/blue_bottom_to_top.png", 17, 39);
 	public static SpriteSheet car_down = new SpriteSheet("/res/textures/carrfor/blue_top_to_bottom.png", 17, 39);
-	public static SpriteSheet car_side = new SpriteSheet("/res/textures/carrfor/blue_side.png", 17, 39);
+	public static SpriteSheet car_side = new SpriteSheet("/res/textures/carrfor/blue_side.png", 50, 19);
 
 	public SpriteSheet(String path, int width, int height) {
 		this.path = path;
