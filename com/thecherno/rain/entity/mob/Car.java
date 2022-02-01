@@ -59,7 +59,7 @@ public class Car extends Mob implements Runnable {
 
 	private void time_wait(){
 		try {
-			thread.sleep(30);
+			thread.sleep(15);
 		} catch(InterruptedException ex){
 			Thread.currentThread().interrupt();
 		}

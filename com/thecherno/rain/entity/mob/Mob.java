@@ -17,17 +17,16 @@ public abstract class Mob extends Entity {
 	protected ArrayList<Car> cars_list;
 
 	public void move(int xa, int ya) {
-		if(ya < 0) {
-			dir = 0;
-			System.out.println("fsd");
-		}
+		if(ya < 0) dir = 0;
 		if(xa > 0) dir = 1;
 		if(xa < 0) dir = 3;
 		if(ya > 0) dir = 2;
 
 		if(!collision(xa, ya, dir)) {
 			x += xa;
-			y += ya;
+			y = y + ya;
+			if(ya == -1)
+			System.out.println(y);
 		}
 	}
 
