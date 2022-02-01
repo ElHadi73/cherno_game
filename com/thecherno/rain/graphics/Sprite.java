@@ -16,6 +16,10 @@ public class Sprite {
 	public static Sprite small_green = new Sprite(5, 7, SpriteSheet.small_green);
 	public static Sprite small_red = new Sprite(5, 7, SpriteSheet.small_red);
 	
+	public static Sprite car_up = new Sprite(17, 39, SpriteSheet.car_up);
+	public static Sprite car_down = new Sprite(17, 39, SpriteSheet.car_down);
+	public static Sprite car_side = new Sprite(17, 39, SpriteSheet.car_side);
+
 	public Sprite(int width, int height, SpriteSheet sheet) {
 		this.width = width;
 		this.height = height;

@@ -3,18 +3,18 @@ package com.thecherno.rain.entity.mob;
 import java.util.ArrayList;
 
 import com.thecherno.rain.entity.Entity;
+import com.thecherno.rain.entity.mob.Car;
 import com.thecherno.rain.graphics.Sprite;
 
 public abstract class Mob extends Entity {
 
-	protected Sprite sprite_up;
-	protected Sprite sprite_down;
-	protected Sprite sprite_right;
-	protected Sprite sprite_left;
+	protected Sprite sprite_up = Sprite.car_up;
+	protected Sprite sprite_down = Sprite.car_down;
+	protected Sprite sprite_side = Sprite.car_side;
 
 	protected int dir = 0;
 	protected boolean moving = false;
-	protected ArrayList<Mob> cars_list;
+	protected ArrayList<Car> cars_list;
 
 	public void move(int xa, int ya) {
 		if(xa != 0 && ya != 0) {
@@ -41,16 +41,17 @@ public abstract class Mob extends Entity {
 	}
 
 	private boolean collision(int xa, int ya, int dir) {
+		Sprite current_sprite;
+		Mob test_car_col ;
 		for(int counter = 0; counter < this.cars_list.size(); counter++){
-			if(dir == 0)
-				Sprite current_sprite = cars_list.get(counter).sprite_up;
-			else if(dir == 1)
-				Sprite current_sprite = cars_list.get(counter).sprite_right;
+			test_car_col = cars_list.get(counter);
+			if(dir == 1 || dir == 3)
+				current_sprite = cars_list.get(counter).sprite_side;
 			else if(dir == 2)
-				Sprite current_sprite = cars_list.get(counter).sprite_down;
-			else if(dir == 4)
-				Sprite current_sprite = cars_list.get(counter).sprite_left;
-			if( (xa+x)<=(car.x+ current_sprite.width) && (xa+x)>=(car.x) && (ya+y)<=(car.y+current_sprite.height) && (ya+y)>=car.y)
+				current_sprite = cars_list.get(counter).sprite_down;
+			else
+				current_sprite = cars_list.get(counter).sprite_up;
+			if( (xa+x)<=(test_car_col.x+ current_sprite.width) && (xa+x)>=(test_car_col.x) && (ya+y)<=(test_car_col.y+current_sprite.height) && (ya+y)>=test_car_col.y)
 				return true;
 		}
 		return false;

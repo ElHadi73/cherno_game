@@ -1,18 +1,24 @@
 package com.thecherno.rain.entity.mob;
 
-class Car extends Mob implements Runnable {
+import java.util.ArrayList;
+
+import com.thecherno.rain.graphics.Sprite;
+import com.thecherno.rain.graphics.Screen;
+
+public class Car extends Mob implements Runnable {
 
 	private Sprite sprite;
 	private boolean moving = false;
 	private Move move;
 
-	public Car (ArrayList<Mob> cars_list){
+	public Car (ArrayList<Car> cars_list){
 		this.move = new Move();
 		this.cars_list = cars_list;
 	}
 
 	public void update() {
-		xa = 0, ya = 0;
+		int xa = 0;
+		int ya = 0;
 
 		if(this.move.up) ya--;
 		if(this.move.down) ya++;
@@ -31,30 +37,29 @@ class Car extends Mob implements Runnable {
 		int flip = 0;
 
 		if(dir == 0) {
-			sprite = Sprite.car_forward;
+			sprite = Sprite.car_up;
 		}
 		if(dir == 1) {
 			sprite = Sprite.car_side;
 		}
 		if(dir == 2) {
-			sprite = sprite.car_back;
+			sprite = sprite.car_down;
 		}
 		if(dir == 3) {
 			sprite = sprite.car_side;
-			flip = 1
+			flip = 1;
 		}
-		screen.renderPlayer(x - 16, y - 16, sprite, flip);
+		screen.renderCar(this, sprite, flip);
 	}
 
-	moveCar(int enter,int leave) {
+	public void moveCar(int enter,int leave) {
 		boolean onTown = true;
 		if(enter == 0) {//this indicate that it enteres from the top
 			this.x = 250;
 			this.y = 0;
 			do {
-				this.move.setMove(0, 1, 0, 0);
+				this.move.setMove(false, true, false, false);
 				this.update();
-				this.render();
 				if(y > 507)
 					onTown = false;
 			}while(onTown);
@@ -62,9 +67,8 @@ class Car extends Mob implements Runnable {
 			this.x = 571;
 			this.y = 250;
 			do {
-				this.move.setMove(0, 0, 0, 1);
+				this.move.setMove(false, false, false, true);
 				this.update();	
-				this.render();
 				if(x < 0)
 					onTown = false;
 			}while(onTown);
@@ -72,9 +76,8 @@ class Car extends Mob implements Runnable {
 			this.x = 250;
 			this.y = 0;
 			do {
-				this.move.setMove(1, 0, 0, 0);
+				this.move.setMove(true, false, false, false);
 				this.update();	
-				this.render();
 				if(y < 0)
 					onTown = false;
 			}while(onTown);
@@ -82,9 +85,8 @@ class Car extends Mob implements Runnable {
 			this.x = 0;
 			this.y = 250;
 			do {
-				this.move.setMove(0, 0, 0, 1);
+				this.move.setMove(false, false, true, false);
 				this.update();	
-				this.render();
 				if(x > 507)
 					onTown = false;
 			}while(onTown);
@@ -93,20 +95,21 @@ class Car extends Mob implements Runnable {
 
 	public void run () {
 		int entre = random.nextInt(3);
+		int leave;
 		do {
-			int leave = random.nextInt(3);
+			leave = random.nextInt(3);
 		}while(entre == leave); 
-		moveCar(entre,leave); 
-		return; 
-	} 
+		moveCar(entre,leave);
+		System.out.println("destroyed");
+	}
 } 
 class Move { 
-	private boolean up; 
-	private boolean down; 
-	private boolean right; 
-	private boolean left; 
+	public  boolean up; 
+	public  boolean down; 
+	public  boolean right; 
+	public  boolean left; 
 
-	public boolean setMove(boolean up, boolean down, boolean right, boolean left){
+	public void setMove(boolean up, boolean down, boolean right, boolean left){
 		this.up = up;
 		this.down = down;
 		this.right = right;

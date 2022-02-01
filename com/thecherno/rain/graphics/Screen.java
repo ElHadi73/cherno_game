@@ -1,19 +1,23 @@
 package com.thecherno.rain.graphics;
 
 import java.util.Random;
+import java.util.ArrayList;
 
 import com.thecherno.rain.graphics.Sprite;
 import com.thecherno.rain.level.OneMapLevel;
 import com.thecherno.rain.entity.Lights;
+import com.thecherno.rain.entity.mob.Car;
 
 public class Screen {
 
 	public int width, height;	
 	public int[] pixels;
+	public ArrayList<Car> cars;
 
-	public Screen(int width, int height) {
+	public Screen(int width, int height,ArrayList<Car> cars) {
 		this.width = width;
 		this.height = height;
+		this.cars = cars;
 
 		pixels = new int[width * height];
 
@@ -74,27 +78,37 @@ public class Screen {
 				}
 	}
 
-public void renderAll(OneMapLevel Map,Lights lights) {
-	renderOneMap(Map);
-	renderLights(lights);
-}
+	public void renderAll(OneMapLevel Map,Lights lights) {
+		renderOneMap(Map);
+		renderLights(lights);
+		renderCars();
+	}
 
-/*public void renderCar(int xp, int yp, Sprite sprite, int flip) {
-  for(int y = 0; y < 32; y++) {
-  int ya = y;
-  int ys = y;
-  if(flip == 2 || flip == 3) 
-  ys = 31 - y;
-  int xa = x;
-  if(flip == 1 || flip ==3)
-  xs = 31 - x;
-  if(xa < -32 || xa >= width || ya < 0 || ya >= height)
-  break;
-  if(xa < 0)
-  xa = 0;
-  int col = sprite.pixels[xs + ys * 32];
-  if(col != 0xffff00ff)
-  pixels[xa + ya * width] = col;
-  }
-  }*/
+	public void renderCars() {
+		for(int counter = 0; counter < this.cars.size(); counter++){
+			this.cars.get(counter).render(this);
+		}
+	}
+
+	public void renderCar(Car car, Sprite sprite, int flip) {
+		int xa;
+		int ya = car.y;
+		int xs;
+		for(int y = 0; y < sprite.height; y++) {
+			xa = car.x;
+			ya++;
+			if(ya < 0 || ya >= 507)
+				continue;
+			for(int x = 0; x < sprite.width; x++){
+				xs = x;
+				if(flip == 1)
+					xs = 31 - x;
+				if(xa < 0 || xa >= 507)
+					break;
+				int col = sprite.pixels[xs + y * 32];
+				if(col != 0xffff00ff)
+					pixels[xa + ya * width] = col;
+			}
+		}
+	}
 }

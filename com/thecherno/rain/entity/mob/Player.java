@@ -46,51 +46,22 @@ public class Player extends Mob {
 		int flip = 0;
 
 		if(dir == 0) {
-			sprite = Sprite.player_forward;
-			if(walking) {
-				if(anim % 20 > 10) {
-					sprite = Sprite.player_forward_1;
-				} else {
-					sprite = Sprite.player_forward_2;
-				}
-			}
+			sprite = Sprite.car_down;
 		}
 
 		if(dir == 1) {
-			sprite = Sprite.player_side;
-			if(walking) {
-				if(anim % 20 > 10) {
-					sprite = Sprite.player_side_1;
-				} else {
-					sprite = Sprite.player_side_2;
-				}
-			}
+			sprite = Sprite.car.side;
 		}
 
 		if(dir == 2) {
-			sprite = Sprite.player_back;
-			if(walking) {
-				if(anim % 20 > 10) {
-					sprite = Sprite.player_back_1;
-				} else {
-					sprite = Sprite.player_back_2;
-				}
-			}
+			sprite = Sprite.car_up;
 		}
 
 		if(dir == 3) {
-			sprite = Sprite.player_side;
-			if(walking) {
-				if(anim % 20 > 10) {
-					sprite = Sprite.player_side_1;
-				} else {
-					sprite = Sprite.player_side_2;
-				}
-			}
+			sprite = Sprite.car_side;
 			flip = 1;
 		}
 
-		screen.renderPlayer(x - 16, y - 16, sprite, flip);
+		screen.renderCar(this, sprite, flip);
 	}
 }
-
