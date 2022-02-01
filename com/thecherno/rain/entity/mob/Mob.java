@@ -39,6 +39,7 @@ public abstract class Mob extends Entity {
 		Mob test_car_col ;
 		for(int counter = 0; counter < this.cars_list.size(); counter++){
 			test_car_col = cars_list.get(counter);
+			if(test_car_col == this) continue;
 			if(dir == 1 || dir == 3)
 				current_sprite = cars_list.get(counter).sprite_side;
 			else if(dir == 2){
@@ -47,7 +48,7 @@ public abstract class Mob extends Entity {
 			}
 			else
 				current_sprite = cars_list.get(counter).sprite_up;
-			if( (xa+x)<(test_car_col.x+ current_sprite.width) && (xa+x)>(test_car_col.x) && (ya+y)<(test_car_col.y+current_sprite.height) && (ya+y)>test_car_col.y)
+			if( (xa+x)<=(test_car_col.x+ current_sprite.width) && (xa+x)>=test_car_col.x && (ya+y)<=(test_car_col.y+current_sprite.height) && (ya+y)>=test_car_col.y)
 				return true;
 		}
 		return false;
