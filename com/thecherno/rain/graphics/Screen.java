@@ -80,8 +80,8 @@ public class Screen {
 
 	public void renderAll(OneMapLevel Map,Lights lights) {
 		renderOneMap(Map);
-		renderLights(lights);
 		renderCars();
+		renderLights(lights);
 	}
 
 	public void renderCars() {
