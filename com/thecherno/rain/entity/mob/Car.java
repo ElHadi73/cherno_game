@@ -13,7 +13,7 @@ public class Car implements Runnable {
 	private boolean moving = false;
 	private Move move;
 	private Thread thread;
-	public Game game;
+	public int enter;
 
 	public int x, y;
 	protected final Random random = new Random();
@@ -26,11 +26,11 @@ public class Car implements Runnable {
 	protected ArrayList<Car> cars_list;
 
 
-	public Car (ArrayList<Car> cars_list,Game game){
+	public Car (ArrayList<Car> cars_list,int enter){
 		super();
 		this.move = new Move();
 		this.cars_list = cars_list;
-		this.game = game;
+		this.enter = enter;
 	}
 	public void move(int xa, int ya) {
 		if(ya < 0) dir = 0;
@@ -77,15 +77,13 @@ public class Car implements Runnable {
 			if(test_car_col == this) continue;
 			if(dir == 1 || dir == 3){
 				current_sprite = cars_list.get(counter).sprite_side;
-				if( (xa+x)<=(test_car_col.x+ current_sprite.width) && (xa+x)>=test_car_col.x && (xa+x+this.sprite.width)<=(test_car_col.x+ current_sprite.width) && (xa+x+this.sprite.width)>=test_car_col.x)
-					return true;
 			}else if(dir == 2){
 				current_sprite = cars_list.get(counter).sprite_down;
 			}
 			else
 				current_sprite = cars_list.get(counter).sprite_up;
-			if((ya+y)<=(test_car_col.y+current_sprite.height) && (ya+y)>=test_car_col.y && (ya+y+this.sprite.height)<=(test_car_col.y+current_sprite.height) && (ya+y+this.sprite.height)>=test_car_col.y)
-				return true;
+			/*if((ya+y)<=(test_car_col.y+current_sprite.height) && (ya+y)>=test_car_col.y && (ya+y+this.sprite.height)<=(test_car_col.y+current_sprite.height) && (ya+y+this.sprite.height)>=test_car_col.y && (xa+x)<=(test_car_col.x+ current_sprite.width) && (xa+x)>=test_car_col.x && (xa+x+this.sprite.width)<=(test_car_col.x+ current_sprite.width) && (xa+x+this.sprite.width)>=test_car_col.x)
+				return true;*/
 		}
 		return false;
 	}
@@ -134,12 +132,10 @@ public class Car implements Runnable {
 				time_wait();
 				this.update();
 				if(y == 250){
-					synchronized(this.game){
-						for(int i=0;i<30;i++){
-							this.move.setMove(false, true, false, false);
-							time_wait();
-							this.update();
-						}
+					for(int i=0;i<30;i++){
+						this.move.setMove(false, true, false, false);
+						time_wait();
+						this.update();
 					}
 				}
 				if(y > 571)
@@ -153,12 +149,10 @@ public class Car implements Runnable {
 				time_wait();
 				this.update();	
 				if(x == 280){
-					synchronized(this.game){
-						for(int i=0;i<30;i++){
-							this.move.setMove(false, false, false, true);
-							time_wait();
-							this.update();
-						}
+					for(int i=0;i<30;i++){
+						this.move.setMove(false, false, false, true);
+						time_wait();
+						this.update();
 					}
 				}
 				if(x < -sprite.width)
@@ -171,13 +165,11 @@ public class Car implements Runnable {
 				this.move.setMove(true, false, false, false);
 				time_wait();
 				this.update();	
-				if(y == 290){
-					synchronized(this.game){
-						for(int i=0;i<30;i++){
-							this.move.setMove(true, false, false, false);
-							time_wait();
-							this.update();
-						}
+				if(y == 320){
+					for(int i=0;i<30;i++){
+						this.move.setMove(true, false, false, false);
+						time_wait();
+						this.update();
 					}
 				}
 				if(y < -sprite.height)
@@ -191,12 +183,10 @@ public class Car implements Runnable {
 				time_wait();
 				this.update();
 				if(x == 200){
-					synchronized(this.game){
-						for(int i=0;i<30;i++){
-							this.move.setMove(false, false, true, false);
-							time_wait();
-							this.update();
-						}
+					for(int i=0;i<30;i++){
+						this.move.setMove(false, false, true, false);
+						time_wait();
+						this.update();
 					}
 				}
 				if(x > 571)
@@ -206,12 +196,11 @@ public class Car implements Runnable {
 	}
 
 	public void run () {
-		int entre = random.nextInt(4);
 		int leave;
 		do {
 			leave = random.nextInt(4);
-		}while(entre == leave); 
-		moveCar(entre,leave);
+		}while(this.enter == leave); 
+		moveCar(this.enter,leave);
 		cars_list.remove(this);
 		System.out.println("destroyed");
 	}
