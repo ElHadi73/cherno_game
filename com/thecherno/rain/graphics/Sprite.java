@@ -18,7 +18,7 @@ public class Sprite {
 	
 	public static Sprite car_up = new Sprite(17, 39, SpriteSheet.car_up);
 	public static Sprite car_down = new Sprite(17, 39, SpriteSheet.car_down);
-	public static Sprite car_side = new Sprite(17, 39, SpriteSheet.car_side);
+	public static Sprite car_side = new Sprite(50, 19, SpriteSheet.car_side);
 
 	public Sprite(int width, int height, SpriteSheet sheet) {
 		this.width = width;
