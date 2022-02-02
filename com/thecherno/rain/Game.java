@@ -111,9 +111,6 @@ public class Game extends Canvas implements Runnable {
 				car_thread.start();
 				System.out.println("hi");
 			}
-
-
-
 			long now = System.nanoTime();
 
 			delta += (now - lastTime) / ns;
