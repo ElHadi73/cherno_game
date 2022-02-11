@@ -16,6 +16,7 @@ import com.thecherno.rain.level.OneMapLevel;
 import com.thecherno.rain.entity.Lights;
 import com.thecherno.rain.entity.mob.Car;
 
+@SuppressWarnings("unchecked")
 public class Game extends Canvas implements Runnable { 
 	private static final long serialVersionUID = 1L;
 
@@ -30,7 +31,11 @@ public class Game extends Canvas implements Runnable {
 	private OneMapLevel carrfor;
 	private boolean running = false;
 	private Lights lights;
-	public ArrayList<Car> cars = new ArrayList<Car>();
+	public ArrayList<Car>[] cars_list = (ArrayList<Car>[]) new ArrayList[4];
+	public ArrayList<Car> top_cars    = cars_list[0] = new ArrayList<Car>();
+	public ArrayList<Car> right_cars  = cars_list[1] = new ArrayList<Car>();
+	public ArrayList<Car> bottom_cars = cars_list[2] = new ArrayList<Car>();
+	public ArrayList<Car> left_cars   = cars_list[3] = new ArrayList<Car>();
 
 	private Screen screen;
 
@@ -41,7 +46,7 @@ public class Game extends Canvas implements Runnable {
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
 
-		screen = new Screen(width, height,cars);
+		screen = new Screen(width, height,cars_list);
 		frame = new JFrame();
 		carrfor = new OneMapLevel("/res/levels/one_map/map-export_original.png");
 		lights = new Lights();
@@ -64,8 +69,8 @@ public class Game extends Canvas implements Runnable {
 
 	public boolean free_slut(int enter){
 		Car test_car;
-		for(int counter = 0; counter < this.cars.size(); counter++) {
-			test_car = cars.get(counter);
+		for(int counter = 0; counter < this.cars_list[enter].size(); counter++) {
+			test_car = cars_list[enter].get(counter);
 			if(enter == 0 && test_car.y + 39 < 0)
 				return false;
 			if(enter == 1 && test_car.x + 39 >571)
@@ -75,7 +80,7 @@ public class Game extends Canvas implements Runnable {
 			if(enter == 3 && test_car.x + 39 < 0)
 				return false;
 		}
-			return true;
+		return true;
 	}
 
 	public void run() {
@@ -95,22 +100,23 @@ public class Game extends Canvas implements Runnable {
 		Car car;
 		int car_n = 0;
 		Thread car_thread;
-		int enter = random.nextInt(4);
+		int enter;
 
 		while (running) {
 
 			//create car
-			if(cars.size()<20)
-				enter = random.nextInt(4);
-			if(random.nextInt(20) == 0 && free_slut(enter)){
-				car = new Car(cars,enter);
-				cars.add(car);
-				car_thread = new Thread(car,String.valueOf(car_n));
-				car.setthread(car_thread);
-				car_n++;
-				car_thread.start();
-				System.out.println("hi");
-			}
+			enter = random.nextInt(4);
+				if(random.nextInt(100) == 0 && free_slut(enter)){
+					car = new Car(cars_list,enter);
+					cars_list[enter].add(car);
+					car_thread = new Thread(car,String.valueOf(car_n));
+					car.setthread(car_thread);
+					car_n++;
+					car_thread.start();
+				}
+
+
+
 			long now = System.nanoTime();
 
 			delta += (now - lastTime) / ns;

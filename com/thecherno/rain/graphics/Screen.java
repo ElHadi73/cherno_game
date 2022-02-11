@@ -12,12 +12,12 @@ public class Screen {
 
 	public int width, height;	
 	public int[] pixels;
-	public ArrayList<Car> cars;
+	public ArrayList<Car>[] cars_list;
 
-	public Screen(int width, int height,ArrayList<Car> cars) {
+	public Screen(int width, int height,ArrayList<Car>[] cars_list) {
 		this.width = width;
 		this.height = height;
-		this.cars = cars;
+		this.cars_list = cars_list;
 
 		pixels = new int[width * height];
 
@@ -84,10 +84,11 @@ public class Screen {
 		renderLights(lights);
 	}
 
-	public void renderCars() {
-		for(int counter = 0; counter < this.cars.size(); counter++){
-			this.cars.get(counter).render(this);
-		}
+		public void renderCars() {
+			for(int i = 0; i<4; i++)
+			for(int counter = 0; counter < this.cars_list[i].size(); counter++){
+				this.cars_list[i].get(counter).render(this);
+			}
 	}
 
 	public void renderCar(Car car, Sprite sprite, int flip) {

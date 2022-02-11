@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.thecherno.rain.graphics.Sprite;
 import com.thecherno.rain.graphics.Screen;
 import com.thecherno.rain.Game;
+import com.thecherno.rain.entity.Sphr;
 import java.util.Random;
 
 public class Car implements Runnable {
@@ -23,10 +24,10 @@ public class Car implements Runnable {
 	protected Sprite sprite_side = Sprite.car_side;
 
 	protected int dir = 0;
-	protected ArrayList<Car> cars_list;
+	protected ArrayList<Car>[] cars_list;
 
 
-	public Car (ArrayList<Car> cars_list,int enter){
+	public Car (ArrayList<Car>[] cars_list,int enter){
 		super();
 		this.move = new Move();
 		this.cars_list = cars_list;
@@ -72,18 +73,26 @@ public class Car implements Runnable {
 		this.set_sprite();
 		Sprite current_sprite;
 		Car test_car_col ;
-		for(int counter = 0; counter < this.cars_list.size(); counter++){
-			test_car_col = cars_list.get(counter);
+		for(int counter = 0; counter < this.cars_list[this.enter].size(); counter++){
+			test_car_col = cars_list[this.enter].get(counter);
 			if(test_car_col == this) continue;
-			if(dir == 1 || dir == 3){
-				current_sprite = cars_list.get(counter).sprite_side;
-			}else if(dir == 2){
-				current_sprite = cars_list.get(counter).sprite_down;
+			if(enter == 3 && (this.x <= test_car_col.x)){
+				current_sprite = test_car_col.sprite_side;
+				if((xa+x+3+this.sprite.width)>=(test_car_col.x))
+					return true;
+			}else if(enter == 1 && (this.x >= test_car_col.x)){
+				current_sprite = test_car_col.sprite_side;
+				if((xa+x-3)<=(test_car_col.x+current_sprite.width))
+					return true;
+			}else if(enter == 0 && (this.y <= test_car_col.y)){
+				current_sprite = test_car_col.sprite_down;
+				if((ya+y+3+this.sprite.height)>=(test_car_col.y))
+					return true;
+			}else if(enter == 2 && (this.y >= test_car_col.y)){
+				current_sprite = test_car_col.sprite_up;
+				if((ya+y-3)<=(test_car_col.y+current_sprite.height))
+					return true;
 			}
-			else
-				current_sprite = cars_list.get(counter).sprite_up;
-			/*if((ya+y)<=(test_car_col.y+current_sprite.height) && (ya+y)>=test_car_col.y && (ya+y+this.sprite.height)<=(test_car_col.y+current_sprite.height) && (ya+y+this.sprite.height)>=test_car_col.y && (xa+x)<=(test_car_col.x+ current_sprite.width) && (xa+x)>=test_car_col.x && (xa+x+this.sprite.width)<=(test_car_col.x+ current_sprite.width) && (xa+x+this.sprite.width)>=test_car_col.x)
-				return true;*/
 		}
 		return false;
 	}
@@ -121,8 +130,9 @@ public class Car implements Runnable {
 	}
 
 	public void moveCar(int enter,int leave) {
+		int ins_hw = 150;
 		int t = 0;
-		System.out.println(enter);
+		System.out.println(enter+" | "+cars_list[enter].size());
 		boolean onTown = true;
 		if(enter == 0) {//this indicate that it enteres from the top
 			this.x = 234;
@@ -131,11 +141,19 @@ public class Car implements Runnable {
 				this.move.setMove(false, true, false, false);
 				time_wait();
 				this.update();
-				if(y == 250){
-					for(int i=0;i<30;i++){
-						this.move.setMove(false, true, false, false);
-						time_wait();
-						this.update();
+				if(y == 158){
+					try {
+						Sphr.Feu11d.acquire();
+						Sphr.Feu11f.acquire();
+					} catch (InterruptedException e) {
+					} finally {
+						for(int i=0;i<ins_hw+50;i++){
+							this.move.setMove(false, true, false, false);
+							time_wait();
+							this.update();
+						Sphr.Feu11d.release();
+						}
+						Sphr.Feu11f.release();
 					}
 				}
 				if(y > 571)
@@ -148,11 +166,17 @@ public class Car implements Runnable {
 				this.move.setMove(false, false, false, true);
 				time_wait();
 				this.update();	
-				if(x == 280){
-					for(int i=0;i<30;i++){
-						this.move.setMove(false, false, false, true);
-						time_wait();
-						this.update();
+				if(x == 310){
+					try {
+						Sphr.Feu21.acquire();
+					} catch (InterruptedException e) {
+					} finally {
+						for(int i=0;i<ins_hw;i++){
+							this.move.setMove(false, false, false, true);
+							time_wait();
+							this.update();
+						}
+						Sphr.Feu21.release();
 					}
 				}
 				if(x < -sprite.width)
@@ -165,11 +189,17 @@ public class Car implements Runnable {
 				this.move.setMove(true, false, false, false);
 				time_wait();
 				this.update();	
-				if(y == 320){
-					for(int i=0;i<30;i++){
-						this.move.setMove(true, false, false, false);
-						time_wait();
-						this.update();
+				if(y == 307){
+					try {
+						Sphr.Feu12.acquire();
+					} catch (InterruptedException e) {
+					} finally {
+						for(int i=0;i<ins_hw;i++){
+							this.move.setMove(true, false, false, false);
+							time_wait();
+							this.update();
+						}
+						Sphr.Feu12.release();
 					}
 				}
 				if(y < -sprite.height)
@@ -182,11 +212,17 @@ public class Car implements Runnable {
 				this.move.setMove(false, false, true, false);
 				time_wait();
 				this.update();
-				if(x == 200){
-					for(int i=0;i<30;i++){
-						this.move.setMove(false, false, true, false);
-						time_wait();
-						this.update();
+				if(x == 160){
+					try {
+						Sphr.Feu22.acquire();
+					} catch (InterruptedException e) {
+					} finally {
+						for(int i=0;i<ins_hw;i++){
+							this.move.setMove(false, false, true, false);
+							time_wait();
+							this.update();
+						}
+						Sphr.Feu22.release();
 					}
 				}
 				if(x > 571)
@@ -201,8 +237,7 @@ public class Car implements Runnable {
 			leave = random.nextInt(4);
 		}while(this.enter == leave); 
 		moveCar(this.enter,leave);
-		cars_list.remove(this);
-		System.out.println("destroyed");
+		cars_list[enter].remove(this);
 	}
 } 
 class Move { 

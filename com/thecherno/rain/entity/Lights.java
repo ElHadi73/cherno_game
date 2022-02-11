@@ -1,6 +1,7 @@
 package com.thecherno.rain.entity;
 
 import com.thecherno.rain.graphics.Sprite;
+import com.thecherno.rain.entity.Sphr;
 
 import java.lang.Thread;
 
@@ -22,12 +23,34 @@ public class Lights extends Thread {
 
 	public void run() {
 		while(running) {
-			if(light_1)
+			if(light_1){
+				try {
+					Sphr.Feu11d.acquire();
+					Sphr.Feu11f.acquire();
+					Sphr.Feu12.acquire();
+				} catch (InterruptedException e) {
+				}
+				finally {
+					Sphr.Feu21.release();
+					Sphr.Feu22.release();
+				}
 				light_1 = false;
-			else
+			}
+			else{
+				try {
+					Sphr.Feu21.acquire();
+					Sphr.Feu22.acquire();
+				} catch (InterruptedException e) {
+				}
+				finally {
+					Sphr.Feu11d.release();
+					Sphr.Feu11f.release();
+					Sphr.Feu12.release();
+				}
 				light_1 = true;
+			}
 			try {
-				sleep(3000);
+				sleep(20000);
 			} catch(InterruptedException e) {}
 		}
 	}
