@@ -47,9 +47,9 @@ public class Screen {
 		for(int y = 0; y < lights.flights.height; y++) {
 			for(int x = 0; x < lights.flights.width; x++) {
 				if(lights.flights.pixels[x+y*lights.flights.width] != 0xffff00ff)
-					pixels[xs_1+x + (ys_1 + y) * width] = lights.flights.pixels[x + y * lights.flights.width];
+					pixels[xs_1+x + (ys_1 +10+ y) * width] = lights.flights.pixels[x + y * lights.flights.width];
 				if(x < 37 && y < 47 && lights.light_right.pixels[x+y*lights.light_right.width] != 0xffff00ff) {
-					pixels[270+x+ ( y+170 ) * width] = lights.light_right.pixels[x + y * lights.light_right.width];
+					pixels[270+x+ ( y+160 ) * width] = lights.light_right.pixels[x + y * lights.light_right.width];
 				}
 			}
 		}
@@ -57,11 +57,11 @@ public class Screen {
 			for(int y = 0; y < lights.stright_green.height; y++)
 				for(int x = 0; x < lights.stright_green.width; x++)
 					if(lights.stright_green.pixels[x+y*lights.stright_green.width] != 0xffff00ff) {
-						pixels[xs_2+x + (ys_2 + y) * width] = lights.stright_green.pixels[x + y * lights.stright_green.width];
-						pixels[xs_2+x+ 24+ (ys_2 + y + 23) * width] = lights.stright_green.pixels[x + y * lights.stright_green.width];
+						pixels[xs_2+x + (ys_2 +10+ y) * width] = lights.stright_green.pixels[x + y * lights.stright_green.width];
+						pixels[xs_2+x+ 24+ (ys_2 + y +10+ 23) * width] = lights.stright_green.pixels[x + y * lights.stright_green.width];
 						if(x < 5 && lights.small_red.pixels[x+y*lights.small_red.width] != 0xffff00ff) {
-							pixels[xs_2+x -7+ (ys_2 + y - 10) * width] = lights.small_red.pixels[x + y * lights.small_red.width];
-							pixels[x+ 302 + (y + 193) * width] = lights.small_red.pixels[x + y * lights.small_red.width];
+							pixels[xs_2+x -7+ (ys_2 + y ) * width] = lights.small_red.pixels[x + y * lights.small_red.width];
+							pixels[x+ 302 + (y + 183) * width] = lights.small_red.pixels[x + y * lights.small_red.width];
 						}
 					}
 			return;
@@ -69,11 +69,11 @@ public class Screen {
 		for(int y = 0; y < lights.stright_red.height; y++)
 			for(int x = 0; x < lights.stright_red.width; x++)
 				if(lights.stright_red.pixels[x+y*lights.stright_red.width] != 0xffff00ff) {
-					pixels[xs_2+x + (ys_2 + y - 8) * width] = lights.stright_red.pixels[x + y * lights.stright_red.width];
-					pixels[xs_2+x+ 24+ (ys_2 + y + 15) * width] = lights.stright_red.pixels[x + y * lights.stright_red.width];
+					pixels[xs_2+x + (ys_2 + y +2) * width] = lights.stright_red.pixels[x + y * lights.stright_red.width];
+					pixels[xs_2+x+ 24+ (ys_2 + y + 25) * width] = lights.stright_red.pixels[x + y * lights.stright_red.width];
 					if(x < 5 && lights.small_green.pixels[x+y*lights.small_green.width] != 0xffff00ff) {
-						pixels[xs_2+x -7+ (ys_2 + y - 2) * width] = lights.small_green.pixels[x + y * lights.small_green.width];
-						pixels[x+ 302 + (y + 200) * width] = lights.small_green.pixels[x + y * lights.small_green.width];
+						pixels[xs_2+x -7+ (ys_2 + y +8) * width] = lights.small_green.pixels[x + y * lights.small_green.width];
+						pixels[x+ 302 + (y + 190) * width] = lights.small_green.pixels[x + y * lights.small_green.width];
 					}
 				}
 	}

@@ -134,7 +134,7 @@ public class Car implements Runnable {
 		int t = 0;
 		boolean onTown = true;
 		if(enter == 0) {//this indicate that it enteres from the top
-			this.x = 234;
+			this.x = 229;
 			this.y = -39;
 			do {
 				this.move.setMove(false, true, false, false);
@@ -180,7 +180,7 @@ public class Car implements Runnable {
 					onTown = false;
 			}while(onTown);
 		} else if(enter == 2) {//this indicate that it enteres from the bottom
-			this.x = 259;
+			this.x = 255;
 			this.y = 571;
 			do {
 				this.move.setMove(true, false, false, false);
