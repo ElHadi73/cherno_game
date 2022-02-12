@@ -1,7 +1,7 @@
 package com.thecherno.rain.entity;
 
 import com.thecherno.rain.graphics.Sprite;
-import com.thecherno.rain.entity.Sphr;
+
 
 import java.lang.Thread;
 
