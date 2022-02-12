@@ -105,7 +105,6 @@ public class Game extends Canvas implements Runnable {
 		while (running) {
 
 			//create car
-			System.out.println(cars_list[0].size()+"  |  "+cars_list[1].size()+"  |  "+cars_list[2].size()+"  |  "+cars_list[3].size());
 			enter = random.nextInt(4);
 			if(random.nextInt(300) == 0 && free_entrie(enter)){
 				car = new Car(cars_list,enter);
