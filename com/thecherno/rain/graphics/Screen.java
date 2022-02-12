@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import com.thecherno.rain.graphics.Sprite;
 import com.thecherno.rain.level.OneMapLevel;
 import com.thecherno.rain.entity.Lights;
-import com.thecherno.rain.entity.mob.Car;
+import com.thecherno.rain.entity.Car;
 
 public class Screen {
 

@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 import com.thecherno.rain.graphics.Screen;
 import com.thecherno.rain.level.OneMapLevel;
 import com.thecherno.rain.entity.Lights;
-import com.thecherno.rain.entity.mob.Car;
+import com.thecherno.rain.entity.Car;
 
 @SuppressWarnings("unchecked")
 public class Game extends Canvas implements Runnable { 
@@ -48,7 +48,7 @@ public class Game extends Canvas implements Runnable {
 
 		screen = new Screen(width, height,cars_list);
 		frame = new JFrame();
-		carrfor = new OneMapLevel("/res/levels/one_map/map-export_original.png");
+		carrfor = new OneMapLevel("/res/levels/map-export_original.png");
 		lights = new Lights();
 	}
 
@@ -71,13 +71,13 @@ public class Game extends Canvas implements Runnable {
 		Car test_car;
 		for(int counter = 0; counter < this.cars_list[enter].size(); counter++) {
 			test_car = cars_list[enter].get(counter);
-			if(enter == 0 && test_car.y + 39 < 0)
+			if(enter == 0 && test_car.y + 39 <= 0)
 				return false;
-			if(enter == 1 && test_car.x + 39 >571)
+			if(enter == 1 && test_car.x + 39 >=571)
 				return false;
-			if(enter == 2 && test_car.y + 39 >571)
+			if(enter == 2 && test_car.y + 39 >=571)
 				return false;
-			if(enter == 3 && test_car.x + 39 < 0)
+			if(enter == 3 && test_car.x + 39 <= 0)
 				return false;
 		}
 		return true;
@@ -105,15 +105,16 @@ public class Game extends Canvas implements Runnable {
 		while (running) {
 
 			//create car
+			System.out.println(cars_list[0].size()+"  |  "+cars_list[1].size()+"  |  "+cars_list[2].size()+"  |  "+cars_list[3].size());
 			enter = random.nextInt(4);
-				if(random.nextInt(100) == 0 && free_slut(enter)){
-					car = new Car(cars_list,enter);
-					cars_list[enter].add(car);
-					car_thread = new Thread(car,String.valueOf(car_n));
-					car.setthread(car_thread);
-					car_n++;
-					car_thread.start();
-				}
+			if(random.nextInt(400) == 0 && free_slut(enter)){
+				car = new Car(cars_list,enter);
+				cars_list[enter].add(car);
+				car_thread = new Thread(car,String.valueOf(car_n));
+				car.setthread(car_thread);
+				car_n++;
+				car_thread.start();
+			}
 
 
 
@@ -179,4 +180,3 @@ public class Game extends Canvas implements Runnable {
 	}
 
 }
-

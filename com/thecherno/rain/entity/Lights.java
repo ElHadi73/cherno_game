@@ -25,8 +25,7 @@ public class Lights extends Thread {
 		while(running) {
 			if(light_1){
 				try {
-					Sphr.Feu11d.acquire();
-					Sphr.Feu11f.acquire();
+					Sphr.Feu11.acquire();
 					Sphr.Feu12.acquire();
 				} catch (InterruptedException e) {
 				}
@@ -43,8 +42,7 @@ public class Lights extends Thread {
 				} catch (InterruptedException e) {
 				}
 				finally {
-					Sphr.Feu11d.release();
-					Sphr.Feu11f.release();
+					Sphr.Feu11.release();
 					Sphr.Feu12.release();
 				}
 				light_1 = true;

@@ -1,4 +1,4 @@
-package com.thecherno.rain.entity.mob;
+package com.thecherno.rain.entity;
 
 import java.util.ArrayList;
 
@@ -130,9 +130,8 @@ public class Car implements Runnable {
 	}
 
 	public void moveCar(int enter,int leave) {
-		int ins_hw = 150;
+		int ins_hw = 120;
 		int t = 0;
-		System.out.println(enter+" | "+cars_list[enter].size());
 		boolean onTown = true;
 		if(enter == 0) {//this indicate that it enteres from the top
 			this.x = 234;
@@ -143,17 +142,15 @@ public class Car implements Runnable {
 				this.update();
 				if(y == 158){
 					try {
-						Sphr.Feu11d.acquire();
-						Sphr.Feu11f.acquire();
+						Sphr.Feu11.acquire();
 					} catch (InterruptedException e) {
 					} finally {
-						for(int i=0;i<ins_hw+50;i++){
+						for(int i=0;i<ins_hw;i++){
 							this.move.setMove(false, true, false, false);
 							time_wait();
 							this.update();
-						Sphr.Feu11d.release();
 						}
-						Sphr.Feu11f.release();
+						Sphr.Feu11.release();
 					}
 				}
 				if(y > 571)
