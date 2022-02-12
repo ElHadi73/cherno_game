@@ -27,25 +27,25 @@ public class Lights extends Thread {
 				try {
 					Sphr.Feu11.acquire();
 					Sphr.Feu12.acquire();
+					light_1 = false;
 				} catch (InterruptedException e) {
 				}
 				finally {
 					Sphr.Feu21.release();
 					Sphr.Feu22.release();
 				}
-				light_1 = false;
 			}
 			else{
 				try {
 					Sphr.Feu21.acquire();
 					Sphr.Feu22.acquire();
+					light_1 = true;
 				} catch (InterruptedException e) {
 				}
 				finally {
 					Sphr.Feu11.release();
 					Sphr.Feu12.release();
 				}
-				light_1 = true;
 			}
 			try {
 				sleep(timeScap);
