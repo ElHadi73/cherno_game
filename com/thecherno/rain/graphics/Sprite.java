@@ -28,19 +28,6 @@ public class Sprite {
 		load();
 	}
 	
-	public Sprite(int size, int color) {
-		this.width = size;
-		this.height = size;
-		pixels = new int[size * size];
-		setColor(color);
-	}
-	
-	private void setColor(int color) {
-		for(int i = 0; i < width * height; i++) {
-			pixels[i] = color;
-		}
-	}
-	
 	private void load() {
 				pixels= sheet.pixels;
 			}
