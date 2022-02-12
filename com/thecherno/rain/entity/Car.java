@@ -140,7 +140,7 @@ public class Car implements Runnable {
 				this.move.setMove(false, true, false, false);
 				time_wait();
 				this.update();
-				if(y == 158){
+				if(y == 150){
 					try {
 						Sphr.Feu11.acquire();
 					} catch (InterruptedException e) {
