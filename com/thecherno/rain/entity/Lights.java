@@ -7,7 +7,7 @@ import java.lang.Thread;
 
 public class Lights extends Thread {
 
-	private int timeScap = 5000;
+	private int timeScap = 20000;
 	public int x1,y1,x2,y2;
 	public boolean running = true;
 	public Sprite flights = Sprite.flights;
@@ -48,7 +48,7 @@ public class Lights extends Thread {
 				light_1 = true;
 			}
 			try {
-				sleep(20000);
+				sleep(timeScap);
 			} catch(InterruptedException e) {}
 		}
 	}
